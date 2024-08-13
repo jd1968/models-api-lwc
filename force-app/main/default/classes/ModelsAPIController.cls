@@ -43,12 +43,10 @@ public with sharing class ModelsAPIController {
 
         models.add(new Model('OpenAI GPT 4 Turbo','sfdc_ai__DefaultOpenAIGPT4Turbo'));
         models.add(new Model('OpenAI GPT 4 32k','sfdc_ai__DefaultOpenAIGPT4_32k'));
+        models.add(new Model('OpenAI GPT 4','sfdc_ai__DefaultOpenAIGPT4'));
+        models.add(new Model('OpenAI GPT 3.5 Turbo 16k','sfdc_ai__DefaultOpenAIGPT35Turbo_16k'));
         models.add(new Model('Anthropic Claude 3 Haiku on Amazon','sfdc_ai__DefaultBedrockAnthropicClaude3Haiku'));
-        // models.add(new Model('OpenAI GPT 4 32k','sfdc_ai__DefaultOpenAIGPT4_32k'));
-        // models.add(new Model('OpenAI GPT 4 32k','sfdc_ai__DefaultOpenAIGPT4_32k'));
-        // models.add(new Model('OpenAI GPT 4 32k','sfdc_ai__DefaultOpenAIGPT4_32k'));
-
-
+        
         return models;
 
     }
