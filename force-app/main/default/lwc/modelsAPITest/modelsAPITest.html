@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Models API Test" icon-name="custom:custom57">
+
+        <div class="slds-var-m-around_medium">
+            <template lwc:if={isLoading} >
+                <lightning-spinner alternative-text="Loading...">
+                </lightning-spinner>
+            </template>
+            
+            <lightning-input type="text" value={prompt} label="Prompt" onchange={handlePromptChange} onkeydown={handleKeydown}></lightning-input>
+            <br/>
+            <lightning-combobox value={modelAPIName} label="Model" onchange={handleModelChange} options={models} onkeydown={handleKeydown}></lightning-combobox>
+            <br/>
+            <lightning-button variant="brand" label="Generate" title="Generate Response" onclick={handleClick}></lightning-button>
+            <br/><br/>
+            <lightning-textarea label="Response" value={response} readonly> </lightning-textarea>
+
+            
+        </div>
+
+
+
+
+    </lightning-card>
+</template>
