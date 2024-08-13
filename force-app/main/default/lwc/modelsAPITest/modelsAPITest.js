@@ -1,4 +1,4 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import generateResponse from '@salesforce/apex/ModelsAPIController.generateResponse';
 import getModels from '@salesforce/apex/ModelsAPIController.getModels';
 
@@ -10,33 +10,53 @@ export default class ModelsAPITest extends LightningElement {
     models = [];
     modelAPIName = '';
 
-    connectedCallback(){
+    @wire(getModels)
+    wiredModels({error,data}){
+        if (data) {
+            this.models = [];
 
-        this.isLoading = true;
-
-        getModels().then(
-
-            // Success
-            (result) => {
-                this.models = [];
-
-                for(const mod of result){
-                    this.models.push({label: mod.label, value: mod.APIName});
-                }
-
-                this.isLoading = false;
-                this.modelAPIName = result[0].APIName;
-                console.log(this.models);
-            },
-
-            // Error
-            (error) => {
-                this.isLoading = false;
-                this.response = error;
+            for(const mod of data){
+                this.models.push({label: mod.label, value: mod.APIName});
             }
-        )
-        
+
+            this.isLoading = false;
+            this.modelAPIName = this.models[0].value;
+            console.log(this.models);
+
+        } else if (error) {
+            this.isLoading = false;
+            this.response = error;
+        }
     }
+
+    //imperative version to get models
+    // connectedCallback(){
+
+    //     this.isLoading = true;
+
+    //     getModels().then(
+
+    //         // Success
+    //         (result) => {
+    //             this.models = [];
+
+    //             for(const mod of result){
+    //                 this.models.push({label: mod.label, value: mod.APIName});
+    //             }
+
+    //             this.isLoading = false;
+    //             this.modelAPIName = result[0].APIName;
+    //             console.log(this.models);
+    //         },
+
+    //         // Error
+    //         (error) => {
+    //             this.isLoading = false;
+    //             this.response = error;
+    //         }
+    //     )
+        
+    // }
 
     handlePromptChange(event){
 
